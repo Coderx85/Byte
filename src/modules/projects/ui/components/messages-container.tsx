@@ -22,9 +22,10 @@ const MessagesContainer = ({
   const lastAssistantMessageIdRef = useRef<string | null>(null);
 
   const trpc = useTRPC();
-  const { data: messages } = useQuery(
+  const { data } = useQuery(
     trpc.messages.getMany.queryOptions({ projectId }, { refetchInterval: 5000 })
   );
+  const messages = data as unknown as any[];
 
   useEffect(() => {
     const lastAssistantMessage = messages?.findLast(

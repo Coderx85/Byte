@@ -25,9 +25,10 @@ interface ProjectHeaderProps {
 
 const ProjectHeader = ({ projectId }: ProjectHeaderProps) => {
   const trpc = useTRPC();
-  const { data: project } = useQuery(
+  const { data } = useQuery(
     trpc.projects.getOne.queryOptions({ id: projectId })
   );
+  const project = data as unknown as any;
 
   const { setTheme, theme } = useTheme();
 

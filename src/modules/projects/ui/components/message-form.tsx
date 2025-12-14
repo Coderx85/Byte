@@ -30,7 +30,8 @@ const MessageForm = ({ projectId }: MessageFormProps) => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
 
-  const { data: usage } = useQuery(trpc.usage.status.queryOptions());
+  const { data } = useQuery(trpc.usage.status.queryOptions());
+  const usage = data as unknown as any;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
